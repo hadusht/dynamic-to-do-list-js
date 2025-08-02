@@ -15,38 +15,37 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Create a new <li> element
+        // Create a new <li> element for the task
         const listItem = document.createElement('li');
         listItem.textContent = taskText;
+        listItem.classList.add('task-item'); // Add class for styling
 
         // Create a remove button
         const removeBtn = document.createElement('button');
         removeBtn.textContent = "Remove";
-        removeBtn.className = 'remove-btn';
+        removeBtn.classList.add('remove-btn'); // Add class for styling
 
-        // When clicked, the button removes the corresponding task
-        removeBtn.onclick = function () {
+        // Add click event to remove the task
+        removeBtn.addEventListener('click', () => {
             taskList.removeChild(listItem);
-        };
+        });
 
-        // Append button to list item, and list item to task list
+        // Append the button to the task item
         listItem.appendChild(removeBtn);
         taskList.appendChild(listItem);
 
-        // Clear the input field
+        // Clear the input field after adding
         taskInput.value = "";
     }
 
-    // Add task when button is clicked
+    // 👉 Add an event listener to addButton to trigger addTask
     addButton.addEventListener('click', addTask);
 
-    // Add task when "Enter" key is pressed
-    taskInput.addEventListener('keypress', function (event) {
+    // 👉 Add an event listener to allow "Enter" key to trigger addTask
+    taskInput.addEventListener('keypress', (event) => {
         if (event.key === 'Enter') {
             addTask();
         }
     });
 
-    // Optionally call addTask once on DOM load if needed (e.g., load initial items)
-    // addTask();  // Uncomment if you want to pre-load an example task
 });
